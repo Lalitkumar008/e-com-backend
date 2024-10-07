@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+ <div class="flex w-[100vw] h-[100vh]">
+    <div class="h-[100vh]  w-[200px] border-r-[1px] border-gray-200 p-4">
+    <p>scratch</p>
+   <div class="flex items-center gap-x-2 mb-8 mt-2">
+    <p class="">sort by</p>
+    <button class="bg-gray-200 rounded-full py-1 px-2 ">popular</button>
+   </div>
+   <div class="mb-16">
+    <p>New collection </p>
+    <p>all products</p>
+    <p>discounted products </p>
+   </div>
+
+   <div>
+    <p>Filter by :</p>
+    <p>availablity</p>
+    <p>discount </p>
+   </div>
+    </div>
+    <div class=" w-[calc(100vw-200px)] h-[100vh]   flex gap-x-2 p-4 capitalize" >
+        <% products.map((product)=>{%>
+            <div class="   h-[220px] w-[200px] relative ">
+               <div class="h-[175px] w-[100%] bg-[<%=product.bgColor%>] flex justify-center items-center ">
+                <img class="h-[100%] object-cover" src="data:image/jpeg;base64,<%=product.image.toString('base64')%>" alt="img" >
+               </div>
+              <div class="">
+                <div class="w-[100%] bg-[<%=product.panelColor%>] absolute bottom-0 px-2 ">
+                    <p>
+                        <%=product.name %>
+                    </p>
+                    <p>
+                        ₹ <%=product.price %>
+                    </p>
+                </div>
+                <a href="/addtocart/<%=product._id%>" class="flex justify-center items-center cursor-pointer z-10 absolute right-2 h-8 w-8  bg-white rounded-full text-[<%=product.textColor%>]">+</a>
+              </div>
+                </div>
+                <%})%>
+            
+    </div>
+ </div>
+</body>
+
+</html>

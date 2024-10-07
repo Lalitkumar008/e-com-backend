@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+<div class="">
+    <div class="h-12  flex items-center">
+        <p class="text-xl ml-4 font-semibold capitalize">scratch</p>
+    </div>
+<div class=" p-4 ">
+<!--     
+<% let uniqueCart=user.cart.filter((item, index)=> user.cart.indexOf(item) === index) %> -->
+    <% user.cart.map((item)=>{%>
+        <div class="flex justify-center gap-x-4 mb-8">
+        <div class=" w-[20%] m- pb-2 h-96">
+            <div class="[100%] bg-[<%=item.bgColor%>] h-[80%] min-h-[180px] p-2">
+                <img class="h-[100%] object-cover" src="data:image/jpeg;base64,<%=item.image.toString('base64')%>" alt="img">
+            </div>
+            <div class="bg-[<%=item.panelColor%>]">
+                <div class="flex justify-between p-2 text-[<%=item.textColor%>]">
+                    <p>
+                        <%=item.name%>
+                    </p>
+                    <p>quantity</p>
+                </div>
+                <div class="flex justify-between p-2 bg-[<%=item.bgColor%>]">
+                    <p>net total</p>
+                    <p>₹ 1200</p>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class=" w-[40%] capitalize">
+<p>price breakdown</p>
+<div class="w-[80%] p-4 space-y-[5px] border-b-2 border-gray-200">
+<div class="flex justify-between w-64 ">
+    <p>Total MRP</p>
+<p>₹ <%=item.price%></p>
+</div>
+<div class="flex justify-between w-64 ">
+    <p>Discount on  MRP</p>
+<p>-₹ <%=item.discountPrice%></p>
+</div>
+<div class="flex justify-between w-64">
+    <p>plateform fee</p>
+<p>₹ 20</p>
+</div>
+<!-- <div class="flex justify-between w-64">
+    <p>shipping fee</p>
+<p>₹ 1920</p>
+</div> -->
+
+</div>
+<div class="p-4 flex justify-between w-64 text-[red] font-semibold">
+    <p>Total Amount</p>
+    <p>₹ <%=item.price-item.discountPrice+20%></p>
+</div>
+        </div>
+        </div>
+        <%})%>
+</div>
+</div>
+</body>
+
+</html>
+

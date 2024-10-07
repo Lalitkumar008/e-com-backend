@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+   <div class="w-[100vw] h-[100vh] flex capitalize">
+    <div class="w-[200px] h-[100%] border-r-[1px] border-gray-200 py-8 px-2 	">
+<p>All products</p>
+<p>create new product</p>
+    </div>
+<div class="w-[calc(100vw-200px)]  h-[100%] px-4 py-10">
+   <div class="space-y-1">
+    <p class="text-xl font-semibold">create new product</p>
+    <p class="font-bold" >product details</p>
+   </div>
+    <form action="/products/create" method="post" class="mt-4" enctype="multipart/form-data"
+    
+    >
+        <input type="file" name="image">
+        <div class="flex my-2">
+            <input class="border-b-[1px] border-gray-300 block outline-none text-black text-sm w-80 mb-4 m-1 rounded p-1 gap-2" type="text" name="name"
+                placeholder="product name" />
+            <input class="border-b-[1px] border-gray-300 block outline-none text-black text-sm w-80 mb-4 m-1 rounded p-1 gap-2" type="text" name="price"
+                placeholder="product price" />
+        </div>
+        <input class="border-b-[1px] border-gray-300 block outline-none text-black text-sm w-80 m-1 rounded p-1 gap-2" type="text" name="discountPrice"
+                placeholder="discount price" />
+        <p class="mb-4 mt-4 font-bold">panel details</p>
+        <div class="flex ">
+            <input class="border-b-[1px] border-gray-300 block outline-none text-black text-sm w-80 mb-4 m-1 rounded p-1 gap-2" type="text" name="bgColor"
+                placeholder="background color" />
+            <input class="border-b-[1px] border-gray-300 block outline-none text-black text-sm w-80 mb-4 m-1 rounded p-1 gap-2" type="text" name="panelColor"
+                placeholder="panel color" />
+          </div>
+            <input class="border-b-[1px] border-gray-300 block outline-none text-black text-sm w-80 mb-4 m-1 rounded p-1 gap-2" type="text" name="textColor"
+                placeholder="text color" />
+
+                <input type="submit" class="w-40 bg-blue-400 p-1 m-1 rounded text-white font-semibold" value="create new product" />
+    </form>
+</div>
+
+   </div>
+</body>
+
+</html>

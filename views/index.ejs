@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-[100vw] h-[100vh] bg-zinc-900 flex text-white">
+<div class="w-1/2  m-2">
+    <div class="  h-[100%]" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+        <h3 class="">Sign Up</h3>
+        <form action="/users/register" class="  p-2" style="display: flex;flex-direction: column;justify-content: center;align-items: center;" method="post">
+            <input class="block outline-none text-black text-sm w-52 m-1 rounded p-1 gap-2" type="text" name="fullName" placeholder="fullname" />
+            <input class="block outline-none text-black text-sm w-52 m-1 rounded p-1 gap-2" type="email" name="email" placeholder="email" />
+            <input class="block outline-none text-black text-sm w-52 m-1 rounded p-1 gap-2" type="password" name="password" placeholder="password" />
+            <input type="submit" class="w-52 bg-blue-400 p-1 m-1 rounded text-white font-semibold" value="create account" />
+        </form>
+    </div>
+</div>
+<div class="w-1/2  m-2">
+    <div class="  h-[100%]" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+        <h3 class="">Login</h3>
+        <form action="/users/login" class="  p-2" method="post"
+            style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+            <input class="outline-none text-black text-sm
+outline-none text-black text-sm
+outline-none text-black text-sm block w-52 m-1 rounded p-1 gap-2" type="email" name="email" placeholder="email" />
+            <input class="outline-none text-black text-sm
+outline-none text-black text-sm
+outline-none text-black text-sm block w-52 m-1 rounded p-1 gap-2" type="password" name="password" placeholder="password" />
+            <input type="submit" class="w-52 bg-blue-400 p-1 m-1 rounded text-white font-semibold"
+                value="create account" />
+        </form>
+    </div>
+</div>
+    </div>
+</body>
+</html>
