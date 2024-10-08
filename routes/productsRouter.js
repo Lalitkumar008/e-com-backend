@@ -5,6 +5,9 @@ const productModel = require("../models/product-model");
 const {
   getAllProducts,
   deleteProductById,
+  getSingleProduct,
+  addToCart,
+  showCartItems,
 } = require("../controllers/productsController");
 router.post("/create", upload.single("productImage"), async (req, res) => {
   try {
@@ -32,4 +35,7 @@ router.post("/create", upload.single("productImage"), async (req, res) => {
 });
 router.get("/allproducts", getAllProducts);
 router.post("/deleteproduct", deleteProductById);
+router.post("/product/:id", getSingleProduct);
+router.post("/addtocart", addToCart);
+router.get("/mycart", showCartItems);
 module.exports = router;

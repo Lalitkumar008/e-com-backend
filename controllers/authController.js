@@ -41,10 +41,15 @@ const loginUser = async (req, res) => {
     return res.status(400).send({ msg: "email or password is incorrect" });
   bcrypt.compare(password, isUser.password, (err, result) => {
     if (result) {
+      console.log(isUser);
       let token = generateToken(isUser);
       res.cookie("token", token);
-      res.send({
-        msg: "succesfully logged innnnnnn",
+      res.status(200).json({
+        msg: "Logged in successfully",
+        token: generateToken(isUser),
+        userId: isUser._id.toString(),
+        username: isUser.fullName,
+        msg2: req.body,
       });
     } else res.status(400).send({ msg: "email or password is incorrect" });
   });
