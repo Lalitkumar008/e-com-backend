@@ -8,8 +8,7 @@ require("dotenv").config();
 
 // cors errors
 var corsOptions = {
-  origin:
-    "http://localhost:5173" || "https://stellular-concha-7615b9.netlify.app/",
+  origin: "https://stellular-concha-7615b9.netlify.app/",
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
   // optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
