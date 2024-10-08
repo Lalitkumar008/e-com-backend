@@ -54,4 +54,11 @@ const loginUser = async (req, res) => {
     } else res.status(400).send({ msg: "email or password is incorrect" });
   });
 };
-module.exports = { registerUser, loginUser };
+
+const userInfo = (req, res) => {
+  try {
+    console.log("userInfooooooo", req.user);
+    res.status(201).json({ userInfo: req.user });
+  } catch (error) {}
+};
+module.exports = { registerUser, loginUser, userInfo };

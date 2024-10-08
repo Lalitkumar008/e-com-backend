@@ -2,13 +2,15 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/user-model");
 
 const isLoggedIn = async (req, res, next) => {
-  if (!req.cookies.token || req.cookies.token == "") {
+  const { authorization, userId } = req.headers;
+  console.log("tokenn", authorization, userId);
+  if (!authorization) {
     // res.redirect("/");
     return res.send("please login first");
   } else {
     try {
-      let decoded = jwt.verify(req.cookies.token, process.env.JWT_KEY);
-      // console.log("decoded", decoded);
+      let decoded = jwt.verify(authorization, process.env.JWT_KEY);
+      console.log("decoded", decoded);
       let user = await userModel
         .findOne({ email: decoded.email })
         .select("-password");

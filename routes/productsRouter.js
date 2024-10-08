@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const upload = require("../config/multer-config");
 const productModel = require("../models/product-model");
 const {
@@ -8,7 +9,9 @@ const {
   getSingleProduct,
   addToCart,
   showCartItems,
+  makePayment,
 } = require("../controllers/productsController");
+const { isLoggedIn } = require("../middlewares/isLoggedIn");
 router.post("/create", upload.single("productImage"), async (req, res) => {
   try {
     console.log(req.body);
@@ -34,8 +37,10 @@ router.post("/create", upload.single("productImage"), async (req, res) => {
   }
 });
 router.get("/allproducts", getAllProducts);
-router.post("/deleteproduct", deleteProductById);
+router.get("/singleproduct/:id", getSingleProduct);
+router.post("/deleteproduct/:id", deleteProductById);
 router.post("/product/:id", getSingleProduct);
 router.post("/addtocart", addToCart);
-router.get("/mycart", showCartItems);
+router.get("/mycart", isLoggedIn, showCartItems);
+router.post("/create-checkout-session", makePayment);
 module.exports = router;

@@ -1,6 +1,7 @@
+const { default: Stripe } = require("stripe");
 const productModel = require("../models/product-model");
 const userModel = require("../models/user-model");
-
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const getAllProducts = async (req, res) => {
   try {
     const allProducts = await productModel.find();
@@ -27,12 +28,12 @@ const getAllProducts = async (req, res) => {
 };
 const getSingleProduct = async (req, res) => {
   try {
-    // const {id}=req.body
+    const { id } = req.params;
 
     const singleProduct = await productModel.find({ _id: id });
-    if (allProducts) {
+    if (singleProduct) {
       //   const plainProducts = allProducts.map((product) => product._doc);
-      const productsWithImage = allProducts.map((product) => {
+      const productsWithImage = singleProduct.map((product) => {
         return {
           ...product._doc,
           productImage: product.productImage
@@ -79,11 +80,11 @@ const showCartItems = async (req, res) => {
   try {
     // id for product id
     // userid for user's Id
-    const userid = req.headers.userid;
-
-    const isUser = await userModel.findOne({ _id: userid });
+    const { userId, token } = req.query;
+    console.log("idd>>", userId, token);
+    const isUser = await userModel.findOne({ _id: userId });
     // const isProduct = await productModel.findOne({ _id: id });
-    if (!userid) {
+    if (!isUser) {
       return res.status(401).json({
         msg: "login first",
       });
@@ -110,9 +111,9 @@ const showCartItems = async (req, res) => {
 // delete contcat by id
 const deleteProductById = async (req, res) => {
   try {
-    const { productId } = req.body;
-
-    const deletedUser = await productModel.deleteOne({ _id: productId });
+    const { id } = req.params;
+    console.log(req.params.id);
+    const deletedUser = await productModel.deleteOne({ _id: id });
 
     if (!deletedUser) {
       return res.status(401).json({ message: "couldn't delete contact" });
@@ -123,10 +124,47 @@ const deleteProductById = async (req, res) => {
     console.log(error);
   }
 };
+
+const makePayment = async (req, res) => {
+  try {
+    console.log("payment working");
+    const { products } = req.body;
+    console.log("Products:", Object.values(products));
+
+    const lineItems = Object.values(products)?.map((product) => ({
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: product.productName,
+          // images: [product.productImage], // Ensure images is an array
+        },
+        unit_amount: Math.round(product.productPrice * 100),
+      },
+      quantity: product.quantity || 1, // Provide a default quantity if not present
+    }));
+
+    console.log("Line Items:", lineItems); // Log the line items to ensure they are correct
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      success_url: "http://localhost:5173/",
+      cancel_url: "http://localhost:5173/",
+    });
+
+    res.status(201).json({ id: session.id });
+  } catch (error) {
+    console.log("Error creating Stripe session:", error);
+    res.status(500).send("Payment failed");
+  }
+};
+
 module.exports = {
   getAllProducts,
   deleteProductById,
   getSingleProduct,
   addToCart,
   showCartItems,
+  makePayment,
 };

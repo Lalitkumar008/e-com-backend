@@ -7,8 +7,10 @@ const cors = require("cors");
 require("dotenv").config();
 
 // cors errors
+const origin = "http://localhost:5173";
+// const origin = "https://stellular-concha-7615b9.netlify.app";
 var corsOptions = {
-  origin: "https://stellular-concha-7615b9.netlify.app",
+  origin: origin,
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
   // optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -16,8 +18,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Increase JSON request size limit to 10MB (or adjust as needed)
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 app.set("view engine", "ejs");
