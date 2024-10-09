@@ -1,7 +1,7 @@
 const { default: Stripe } = require("stripe");
 const productModel = require("../models/product-model");
 const userModel = require("../models/user-model");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const getAllProducts = async (req, res) => {
   try {
     const allProducts = await productModel.find();
