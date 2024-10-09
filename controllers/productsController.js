@@ -127,33 +127,31 @@ const deleteProductById = async (req, res) => {
 
 const makePayment = async (req, res) => {
   try {
-    console.log("payment working");
-    const { products } = req.body;
-    console.log("Products:", Object.values(products));
+    // console.log("payment working");
+    // const { products } = req.body;
+    // console.log("Products:", Object.values(products));
 
-    const lineItems = Object.values(products)?.map((product) => ({
-      price_data: {
-        currency: "inr",
-        product_data: {
-          name: product.productName,
-          // images: [product.productImage], // Ensure images is an array
-        },
-        unit_amount: Math.round(product.productPrice * 100),
-      },
-      quantity: product.quantity || 1, // Provide a default quantity if not present
-    }));
+    // const lineItems = Object.values(products)?.map((product) => ({
+    //   price_data: {
+    //     currency: "inr",
+    //     product_data: {
+    //       name: product.productName,
+    //       // images: [product.productImage], // Ensure images is an array
+    //     },
+    //     unit_amount: Math.round(product.productPrice * 100),
+    //   },
+    //   quantity: product.quantity || 1, // Provide a default quantity if not present
+    // }));
 
-    console.log("Line Items:", lineItems); // Log the line items to ensure they are correct
+    // const session = await stripe.checkout.sessions.create({
+    //   payment_method_types: ["card"],
+    //   line_items: lineItems,
+    //   mode: "payment",
+    //   success_url: "http://localhost:5173/",
+    //   cancel_url: "http://localhost:5173/",
+    // });
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: lineItems,
-      mode: "payment",
-      success_url: "http://localhost:5173/",
-      cancel_url: "http://localhost:5173/",
-    });
-
-    res.status(201).json({ id: session.id });
+    res.status(201).json({ msg: "payment succesful" });
   } catch (error) {
     console.log("Error creating Stripe session:", error);
     res.status(500).send("Payment failed");
