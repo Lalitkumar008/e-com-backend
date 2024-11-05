@@ -8,7 +8,7 @@ require("dotenv").config();
 
 // cors errors
 // const origin = "http://localhost:5173";
-const origin = "https://stellular-concha-7615b9.netlify.app";
+const origin = "https://jovial-cactus-3c6945.netlify.app/";
 var corsOptions = {
   origin: origin,
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
