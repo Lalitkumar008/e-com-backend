@@ -6,7 +6,9 @@ const isLoggedIn = async (req, res, next) => {
   console.log("tokenn", authorization, userId);
   if (!authorization) {
     // res.redirect("/");
-    return res.send("please login first");
+    return res
+      .status(401)
+      .json({ msg: "please login first", isLoggedIn: false });
   } else {
     try {
       let decoded = jwt.verify(authorization, process.env.JWT_KEY);

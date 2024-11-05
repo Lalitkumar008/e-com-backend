@@ -10,8 +10,11 @@ const userSchema = mongoose.Schema({
   fullName: {
     type: String,
   },
-  contactNo: {
+  phone: {
     type: Number,
+  },
+  deliveryAddress: {
+    type: String,
   },
 
   cart: [

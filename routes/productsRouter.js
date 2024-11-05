@@ -16,14 +16,28 @@ router.post("/create", upload.single("productImage"), async (req, res) => {
   try {
     console.log(req.body);
     console.log("files>>>>>", req.file);
-    const { productName, productPrice, stockLevel, productDescription } =
-      req.body;
+    const {
+      productName,
+      productPrice,
+      stockLevel,
+      productMrp,
+      productDescription,
+      bgColor,
+      panelColor,
+      productColor,
+      productCategory,
+    } = req.body;
     const product = await productModel.create({
       productImage: req.file ? req.file.buffer : null,
       productName,
       productPrice,
       stockLevel,
       productDescription,
+      productMrp,
+      bgColor,
+      panelColor,
+      productColor,
+      productCategory,
     });
     console.log("product route hit");
     res.send({

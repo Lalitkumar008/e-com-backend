@@ -2,16 +2,17 @@ const userModel = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { generateToken } = require("../utils/generateToken");
+const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
 // creating a user
 const registerUser = async function (req, res) {
   try {
-    const { email, fullName, password } = req.body;
+    const { email, fullName, password, phone, deliveryAddress } = req.body;
     console.log();
     const isUser = await userModel.findOne({ email });
 
     if (isUser) {
-      return res.send({
+      return res.status(401).send({
         msg: "User alraedy registered",
       });
     }
@@ -22,10 +23,14 @@ const registerUser = async function (req, res) {
           email,
           fullName,
           password: hash,
+          phone,
+          deliveryAddress,
         });
         let token = generateToken(createdUser);
         res.cookie("token", token);
-        res.send(createdUser);
+        res
+          .status(201)
+          .json({ user: createdUser, msg: "succesfully created user" });
       });
     });
   } catch (err) {
@@ -58,7 +63,7 @@ const loginUser = async (req, res) => {
 const userInfo = (req, res) => {
   try {
     console.log("userInfooooooo", req.user);
-    res.status(201).json({ userInfo: req.user });
+    res.status(201).json({ userInfo: req.user, isLoggedIn: true });
   } catch (error) {}
 };
 module.exports = { registerUser, loginUser, userInfo };
